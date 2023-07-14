@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNetflixOriginals, nfOriginalsSelector } from '../features/tv/tvSlice';
 import Header from '../components/Header';
+import Row from '../components/Row';
 
 function HomeScreen(props) {
     const [randomIndex, setRandomIndex]=useState(null);
@@ -30,7 +31,7 @@ function HomeScreen(props) {
                 <Header video={nfOriginals.data.results[randomIndex]}/>
                 : "loading"
             }
-            
+            <Row />
         </>
        
     );
