@@ -6,7 +6,12 @@ import {
 } from "../features/tv/tvSlice";
 import Header from "../components/Header";
 import Row from "../components/Row";
-import { fetchPopularMovies, fetchTopRatedMovies, popularMoviesSelector, topRatedMovieSelector } from "../features/movie/movieSlice";
+import {
+  fetchPopularMovies,
+  fetchTopRatedMovies,
+  popularMoviesSelector,
+  topRatedMovieSelector,
+} from "../features/movie/movieSlice";
 
 function HomeScreen(props) {
   const [randomIndex, setRandomIndex] = useState(null);
@@ -28,14 +33,30 @@ function HomeScreen(props) {
 
   return (
     <>
-      {nfOriginals.status === "success" ? (
+      {nfOriginals.status === "loading" ? (
+        <div className="h-100 d-flex justify-content-center align-items-center">
+          <div className="spinner-border text-white" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : nfOriginals.status === "success" ? (
         <Header video={nfOriginals.data.results[randomIndex]} />
       ) : (
-        "loading"
+        "error"
       )}
       <div className="container-fluid py-3">
-        <Row title="Popular Movies" action={fetchPopularMovies} selector={popularMoviesSelector} />
-        <Row title="Top Rated Movies" action={fetchTopRatedMovies} selector={topRatedMovieSelector}/>
+        <Row
+          title="Popular Movies"
+          action={fetchPopularMovies}
+          selector={popularMoviesSelector}
+          platform="movie"
+        />
+        <Row
+          title="Top Rated Movies"
+          action={fetchTopRatedMovies}
+          selector={topRatedMovieSelector}
+          platform="movie"
+        />
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { truncateText } from "../utility/utils";
+import Ratings from "./Ratings";
 
 function Card(props) {
   const { video } = props;
@@ -17,6 +18,7 @@ function Card(props) {
             video?.original_title ||
             video?.original_name}
         </h5>
+        <Ratings voteAverage={video?.vote_average} voteCount={video?.vote_count}/>
         <p>{truncateText(video?.overview, 60)}</p>
       </div>
     </div>
