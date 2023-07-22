@@ -40,7 +40,7 @@ function HomeScreen(props) {
           </div>
         </div>
       ) : nfOriginals.status === "success" ? (
-        <Header video={nfOriginals.data.results[randomIndex]} />
+        <Header video={nfOriginals.data.results[randomIndex]} platform="tv"/>
       ) : (
         "error"
       )}
