@@ -5,5 +5,5 @@ export const truncateText=(str, num)=>{
         }else{
             return str.slice(0, num) + "...";
         }
-    }    
+    }
 }

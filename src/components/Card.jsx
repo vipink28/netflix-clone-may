@@ -1,11 +1,19 @@
 import React from "react";
 import { truncateText } from "../utility/utils";
 import Ratings from "./Ratings";
+import { useDispatch } from "react-redux";
+import { fetchVideoDetails } from "../features/common/commonSlice";
 
 function Card(props) {
-  const { video } = props;
+  const { video, platform } = props;  
+  const dispatch =useDispatch();
+
+  const getVideoDetails = ()=>{
+    dispatch(fetchVideoDetails({platform, id: video.id}));
+  }
+
   return (
-    <div className="card h-100 text-white">
+    <div className="card h-100 text-white" onClick={getVideoDetails} data-bs-toggle="modal" data-bs-target="#video-modal"> 
       <img
         className="card-img-top"
         src={`https://image.tmdb.org/t/p/original${video?.backdrop_path}`}

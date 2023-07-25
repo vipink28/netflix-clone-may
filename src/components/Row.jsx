@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function Row(props) {
-    const { title, selector, action } = props;
+    const { title, selector, action, platform } = props;
     const dispatch = useDispatch();
     const popular = useSelector(selector);
     useEffect(()=>{
@@ -33,7 +33,7 @@ function Row(props) {
           popular.data.results.map((item)=>{
             return(
               <SwiperSlide key={item.id}>
-                <Card video={item}/>
+                <Card video={item} platform={platform}/>
               </SwiperSlide>
             )
           }): ""
