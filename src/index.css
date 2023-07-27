@@ -160,7 +160,7 @@ input[type=number] {
     color: #fff;
 }
 
-.youtube-player{
+.video-player{
     position: relative;
     z-index: 7;
 }

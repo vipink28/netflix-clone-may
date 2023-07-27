@@ -14,6 +14,12 @@ function Navigation(props) {
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>            
+              <li className="nav-item">
+                <Link className="nav-link" aria-current="page" to="/browse/tv">Tv</Link>
+              </li>            
+              <li className="nav-item">
+                <Link className="nav-link" aria-current="page" to="/browse/movie">Movies</Link>
+              </li>            
             </ul>         
           </div>
         </div>
