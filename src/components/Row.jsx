@@ -8,6 +8,7 @@ import Card  from "./Card";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 
 
@@ -18,6 +19,10 @@ function Row(props) {
     useEffect(()=>{
       dispatch(action());
     }, [])
+
+    // if(genre){
+    //   axios.get(`${platform}?with_genres=${genre.name}`)
+    // }
 
     return (
       <div className="py-3 video-row text-white">
