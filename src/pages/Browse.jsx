@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { fetchNetflixOriginals, nfOriginalsSelector } from '../features/tv/tvSlice';
 import { fetchPopularMovies, fetchTopRatedMovies, popularMoviesSelector, topRatedMovieSelector } from '../features/movie/movieSlice';
 import Row from '../components/Row';
-import axios from 'axios';
+import axios from '../utility/axios';
 import { requests } from '../utility/requests';
 
 
@@ -15,10 +15,12 @@ function Browse(props) {
     const [videoList, setVideoList]= useState(null);
     const nfOriginals = useSelector(nfOriginalsSelector);
     const popular = useSelector(popularMoviesSelector);
-
-    useEffect(()=>{
-        axios.get(requests.getGenres(platform))
-    }, [])
+    const [genreList, setGenreList]=useState(null);
+    
+    const getGenreList=async()=>{
+        const response = await axios.get(requests.getGenres(platform));
+        setGenreList(response.data.genres);
+    }
 
     useEffect(()=>{
         if(platform === "tv"){
@@ -36,15 +38,24 @@ function Browse(props) {
         }
     }, [platform, nfOriginals, popular])
 
+    useEffect(()=>{
+        getGenreList();
+    }, [platform])
+
+
     const randomNumber = Math.floor(Math.random() * videoList?.length);
 
     return (
        <>
         <Header video={videoList ? videoList[randomNumber]: ""} platform={platform}/>
-
-        <Row title="Top Rated Movies" action={fetchTopRatedMovies}
-          selector={topRatedMovieSelector} platform={platform} genre=[genre[0]]/>
+        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[0]: null }/>
        </>
+
+        
+
+
+
+
     );
 }
 

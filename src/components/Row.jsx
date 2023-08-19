@@ -13,16 +13,15 @@ import axios from 'axios';
 
 
 function Row(props) {
-    const { title, selector, action, platform } = props;
+    const { title, selector, action, platform, isGenreRow } = props;
     const dispatch = useDispatch();
-    const popular = useSelector(selector);
+    const videoList = useSelector((selector));
+    
     useEffect(()=>{
-      dispatch(action());
-    }, [])
-
-    // if(genre){
-    //   axios.get(`${platform}?with_genres=${genre.name}`)
-    // }
+      if(!isGenreRow){
+        dispatch(action());
+      }
+    }, [isGenreRow])
 
     return (
       <div className="py-3 video-row text-white">
@@ -34,8 +33,8 @@ function Row(props) {
         slidesPerView={5}
       >
         {
-          popular?.status === "success" ?
-          popular.data.results.map((item)=>{
+          videoList?.status === "success" ?
+          videoList.data.results.map((item)=>{
             return(
               <SwiperSlide key={item.id}>
                 <Card video={item} platform={platform}/>
@@ -43,7 +42,7 @@ function Row(props) {
             )
           }): ""
         }       
-      </Swiper>
+        </Swiper>
       </div>
     );
 }
