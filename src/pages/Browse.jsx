@@ -7,6 +7,7 @@ import { fetchPopularMovies, fetchTopRatedMovies, popularMoviesSelector, topRate
 import Row from '../components/Row';
 import axios from '../utility/axios';
 import { requests } from '../utility/requests';
+import { shuffle } from '../utility/utils';
 
 
 function Browse(props) {
@@ -19,7 +20,8 @@ function Browse(props) {
     
     const getGenreList=async()=>{
         const response = await axios.get(requests.getGenres(platform));
-        setGenreList(response.data.genres);
+        let gen = shuffle(response.data.genres);
+        setGenreList(gen);
     }
 
     useEffect(()=>{
@@ -48,7 +50,18 @@ function Browse(props) {
     return (
        <>
         <Header video={videoList ? videoList[randomNumber]: ""} platform={platform}/>
-        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[0]: null }/>
+        
+        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[0]: null } platform={platform}/>
+
+        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[1]: null } platform={platform}/>
+
+        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[2]: null } platform={platform}/>
+
+        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[3]: null } platform={platform}/>
+
+        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[4]: null } platform={platform}/>
+
+        <Row selector={popularMoviesSelector} isGenreRow={true} genre={genreList ? genreList[5]: null } platform={platform}/>
        </>
 
         
